@@ -2,7 +2,7 @@
   "name": "open-in-obsidian",
   "displayName": "Open in Obsidian",
   "description": "Open the current Markdown file in Obsidian via its URI scheme",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "packageManager": "pnpm@10.28.0",
   "publisher": "dndd",
   "license": "MIT",
