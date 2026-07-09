@@ -4,11 +4,16 @@ on:
   release:
     types: [published]
 
+permissions:
+  contents: write
+
 jobs:
   publish:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+        with:
+          ref: main
 
       - uses: pnpm/action-setup@v4
 
@@ -17,14 +22,22 @@ jobs:
           node-version: 20
           cache: pnpm
 
-      - name: Verify package.json version matches release tag
+      - name: Bump package.json to release version
         run: |
           VERSION="${{ github.event.release.tag_name }}"
           VERSION="${VERSION#v}"
-          PKG_VERSION=$(node -p "require('./package.json').version")
-          if [ "$PKG_VERSION" != "$VERSION" ]; then
-            echo "Release tag ($VERSION) does not match package.json version ($PKG_VERSION)"
-            exit 1
+          pnpm version "$VERSION" --no-git-tag-version --allow-same-version
+
+      - name: Commit version bump
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          if git diff --quiet package.json; then
+            echo "Version already up to date, skipping commit"
+          else
+            git add package.json
+            git commit -m "chore: bump version to ${{ github.event.release.tag_name }}"
+            git push origin HEAD:main
           fi
 
       - run: pnpm install --frozen-lockfile
