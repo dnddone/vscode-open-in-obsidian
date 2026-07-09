@@ -1,4 +1,4 @@
-# vscode-plugins
+# vscode-extensions
 
 Monorepo for dndd's VS Code extensions, published under the `dndd`
 Marketplace publisher.

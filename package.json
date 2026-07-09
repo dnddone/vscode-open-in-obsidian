@@ -1,5 +1,5 @@
 {
-  "name": "vscode-plugins",
+  "name": "vscode-extensions",
   "private": true,
   "description": "Monorepo for Dndd's VS Code extensions",
   "scripts": {

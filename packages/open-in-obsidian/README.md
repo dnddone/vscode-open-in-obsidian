@@ -1,8 +1,10 @@
 # Open in Obsidian (VS Code extension)
 
-Adds a command, an editor/explorer right-click item, and a keyboard shortcut
-(`Cmd/Ctrl+Alt+O` on a `.md` file) that opens the current file in Obsidian,
-jumping straight to the right note in the right vault.
+Adds a command, an editor/explorer right-click item, a keyboard shortcut
+(`Cmd/Ctrl+Alt+O` on a `.md` file), and a status bar button that opens the
+current file in Obsidian, jumping straight to the right note in the right
+vault. The status bar button appears at the bottom left whenever a Markdown
+file is active.
 
 It works by shelling out to `obsidian://open?path=<absolute file path>`.
 Obsidian's `path` parameter searches your known vaults for whichever one

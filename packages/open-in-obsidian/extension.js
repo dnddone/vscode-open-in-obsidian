@@ -2,6 +2,26 @@ const vscode = require('vscode');
 const { exec } = require('child_process');
 
 function activate(context) {
+  const statusBarItem = vscode.window.createStatusBarItem(vscode.StatusBarAlignment.Left, 9999);
+  // Status bar items only support codicons, not custom images. There's no
+  // gem/crystal codicon (that was a mistake) — sparkle-filled is the
+  // closest faceted shape to Obsidian's logo.
+  statusBarItem.text = '$(sparkle-filled)';
+  statusBarItem.color = '#7C3AED';
+  statusBarItem.tooltip = 'Open in Obsidian';
+  statusBarItem.command = 'openInObsidian.open';
+
+  const updateStatusBarVisibility = (editor) => {
+    if (editor?.document.languageId === 'markdown') {
+      statusBarItem.show();
+    } else {
+      statusBarItem.hide();
+    }
+  };
+
+  updateStatusBarVisibility(vscode.window.activeTextEditor);
+  context.subscriptions.push(vscode.window.onDidChangeActiveTextEditor(updateStatusBarVisibility));
+
   const disposable = vscode.commands.registerCommand('openInObsidian.open', (uri) => {
     const targetUri = uri || vscode.window.activeTextEditor?.document.uri;
 
@@ -42,7 +62,7 @@ function activate(context) {
     });
   });
 
-  context.subscriptions.push(disposable);
+  context.subscriptions.push(disposable, statusBarItem);
 }
 
 function deactivate() {}

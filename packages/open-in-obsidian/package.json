@@ -7,13 +7,14 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/dnddone/vscode-plugins",
+    "url": "https://github.com/dnddone/vscode-extensions",
     "directory": "packages/open-in-obsidian"
   },
   "engines": {
     "vscode": "^1.85.0"
   },
   "categories": ["Other"],
+  "activationEvents": ["onStartupFinished"],
   "main": "./extension.js",
   "scripts": {
     "package": "vsce package --no-dependencies",
