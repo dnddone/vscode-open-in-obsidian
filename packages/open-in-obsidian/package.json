@@ -1,0 +1,58 @@
+{
+  "name": "open-in-obsidian",
+  "displayName": "Open in Obsidian",
+  "description": "Open the current Markdown file in Obsidian via its URI scheme",
+  "version": "0.0.1",
+  "publisher": "dndd",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/dnddone/vscode-plugins",
+    "directory": "packages/open-in-obsidian"
+  },
+  "engines": {
+    "vscode": "^1.85.0"
+  },
+  "categories": ["Other"],
+  "main": "./extension.js",
+  "scripts": {
+    "package": "vsce package --no-dependencies",
+    "publish": "vsce publish --no-dependencies"
+  },
+  "devDependencies": {
+    "@types/vscode": "^1.85.0",
+    "@vscode/vsce": "^3.9.2"
+  },
+  "contributes": {
+    "commands": [
+      {
+        "command": "openInObsidian.open",
+        "title": "Open in Obsidian"
+      }
+    ],
+    "menus": {
+      "editor/context": [
+        {
+          "when": "resourceLangId == markdown",
+          "command": "openInObsidian.open",
+          "group": "navigation"
+        }
+      ],
+      "explorer/context": [
+        {
+          "when": "resourceExtname == .md",
+          "command": "openInObsidian.open",
+          "group": "navigation"
+        }
+      ]
+    },
+    "keybindings": [
+      {
+        "command": "openInObsidian.open",
+        "key": "ctrl+alt+o",
+        "mac": "cmd+alt+o",
+        "when": "resourceLangId == markdown"
+      }
+    ]
+  }
+}
