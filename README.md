@@ -10,25 +10,7 @@ It works by shelling out to `obsidian://open?path=<absolute file path>`.
 Obsidian's `path` parameter searches your known vaults for whichever one
 contains that path, so you don't need to hardcode a vault name anywhere.
 
-## Install from the Marketplace
-
-Search for "Open in Obsidian" (publisher `dndd`) in the VS Code Extensions
-view, or:
-
-```bash
-code --install-extension dndd.open-in-obsidian
-```
-
-## Install from source (this repo)
-
-```bash
-pnpm install
-pnpm package
-code --install-extension open-in-obsidian-0.0.1.vsix
-```
-
-Reload VS Code. The command, context menu items, and keybinding are now
-always available in every workspace — no dev host, no per-project setup.
+![Example](images/example.png)
 
 ## Notes / things to check on your machine
 
