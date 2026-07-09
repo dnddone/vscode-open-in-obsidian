@@ -45,5 +45,8 @@ always available in every workspace — no dev host, no per-project setup.
 - Changing where it shows up: the `when` clauses currently restrict it to
   `.md` files. Adjust `resourceExtname` / `resourceLangId` in `package.json`
   if you want it available more broadly (e.g. also on `.mdx`).
-- To update after editing source: bump `version` in `package.json`, tag
-  `v<version>` and push — CI packages and publishes it.
+- To release a new version: bump `version` in `package.json`, commit, then
+  create a GitHub Release with tag `v<version>` (must match). Publishing
+  the release triggers CI to package and publish to the Marketplace. A
+  plain `git push --tags` does **not** trigger it — only a published
+  Release does.

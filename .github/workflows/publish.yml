@@ -1,9 +1,8 @@
 name: Publish extension
 
 on:
-  push:
-    tags:
-      - "v*"
+  release:
+    types: [published]
 
 jobs:
   publish:
@@ -18,12 +17,13 @@ jobs:
           node-version: 20
           cache: pnpm
 
-      - name: Verify package.json version matches tag
+      - name: Verify package.json version matches release tag
         run: |
-          VERSION="${GITHUB_REF_NAME#v}"
+          VERSION="${{ github.event.release.tag_name }}"
+          VERSION="${VERSION#v}"
           PKG_VERSION=$(node -p "require('./package.json').version")
           if [ "$PKG_VERSION" != "$VERSION" ]; then
-            echo "Tag version ($VERSION) does not match package.json version ($PKG_VERSION)"
+            echo "Release tag ($VERSION) does not match package.json version ($PKG_VERSION)"
             exit 1
           fi
 
