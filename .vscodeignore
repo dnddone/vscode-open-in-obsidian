@@ -1,0 +1,6 @@
+.vscodeignore
+.gitignore
+**/*.vsix
+.github/**
+.vscode/**
+pnpm-lock.yaml
